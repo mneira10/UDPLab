@@ -1,14 +1,15 @@
 import socket
 
-
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
-MESSAGE = "Hello, World!"
-
-print "UDP target IP:", UDP_IP
-print "UDP target port:", UDP_PORT
-print "message:", MESSAGE
+IP = raw_input("IP: ")
+puerto = raw_input("Puerto: ")
+numObj = raw_input("Numero de objetos a mandar: ")
+print "-------------------------------"
+print "IP destino: ", IP
+print "Puerto destino: ", puerto
+print "Numero de mensajes: ", numObj
+print "-------------------------------"
+print "Conectando "
 
 sock = socket.socket(socket.AF_INET, # Internet
                       socket.SOCK_DGRAM) # UDP
-sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+sock.sendto(MESSAGE, (IP, puerto))
