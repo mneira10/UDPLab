@@ -1,7 +1,9 @@
 import socket
 
-IP = input("IP: ")
-puerto = int(input("Puerto: "))
+# IP = input("IP: ")
+IP = "localhost"
+# puerto = int(input("Puerto: "))
+puerto = 5007
 numObj = input("Numero de objetos a mandar: ")
 print ("-------------------------------")
 print ("IP destino: ", IP)
@@ -13,17 +15,17 @@ print ("Conectando por TCP...")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((IP, puerto))
 s.send(numObj.encode())
-data = s.recv(1024)
-print ("Data recieved: ", data.decode())
+data = s.recv(1024).decode()
+print ("Data recieved: ", data)
 if(data == "OK"):
     s.close()
 
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.sendto("hello".encode(), (IP, puerto))
 
 
 
 
-
-print( "received data:", data)
 
 # sock = socket.socket(socket.AF_INET, # Internet
 #                       socket.SOCK_DGRAM) # UDP
