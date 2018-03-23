@@ -1,5 +1,14 @@
 import socket    
-import sys                                     
+import sys       
+import hashlib
+
+def md5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+
 IP = "localhost"
 port = 12348
 # connect to localhost
@@ -11,21 +20,43 @@ conn, addr = s.accept()
 print( 'Conexion TCP activa en direccion:', addr)
 
 
-f = open("arch.txt",'rb')
-print("Sending...")
 
+
+hash = md5("arch.txt")
+# print(hash)
+print("hash: " + hash)
+print("sending hash...")
+conn.send((str(hash)+":START").encode())
+
+print("hash sent...")
+
+
+data = conn.recv(1024).decode()
+
+if(data=="BEGIN"):
+    print("Sending file...")
+
+
+
+
+f = open("arch.txt",'rb')
 l = f.read(1024)
 
 while (l):
-    print('Sending...')
+    print('Sending file...')
     conn.send(l)
     l = f.read(1024)
 f.close()
+
+
 print("Done Sending")
+
 conn.shutdown(2)
 conn.close()   
 s.shutdown(2)
 s.close() 
 print("closed ports")
-
+# print(md5("arch.txt"))
 sys.exit()
+
+
