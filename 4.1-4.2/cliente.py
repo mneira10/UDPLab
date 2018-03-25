@@ -1,32 +1,32 @@
 import socket
+import time
 
-# IP = input("IP: ")
-IP = "localhost"
-# puerto = int(input("Puerto: "))
-puerto = 5007
-numObj = input("Numero de objetos a mandar: ")
-print ("-------------------------------")
-print ("IP destino: ", IP)
-print ("Puerto destino: ", puerto)
-print ("Numero de mensajes: ", numObj)
-print ("-------------------------------")
-print ("Conectando por TCP...")
+IP = input("IP del servidor: ")
+puerto = int(input("Puerto del servidor: "))
 
+numObj = int(input("Numero de objetos a enviar: "))
+
+# TCP
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((IP, puerto))
-s.send(numObj.encode())
+s.send(str(numObj).encode())
 data = s.recv(1024).decode()
-print ("Data recieved: ", data)
-if(data == "OK"):
-    s.close()
+s.close()
+print("recibido:", data)
+if(data != "OK"):
+	raise Exception("debe ser ok: " + data)
 
+# UDP
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.sendto("hello".encode(), (IP, puerto))
-
-
-
-
-
-# sock = socket.socket(socket.AF_INET, # Internet
-#                       socket.SOCK_DGRAM) # UDP
-# sock.sendto(MESSAGE, (IP, puerto))
+contador = 1
+paquetePerdidoCada = 10
+while contador != numObj + 1:
+	# descomente este snippet par simular 1 paquete perdido cada 10, por ejemplo
+	# if contador % paquetePerdidoCada == 0:
+	# 	contador += 1
+	# 	continue
+	obj = str(contador) + "|" + str(time.time())
+	s.sendto(obj.encode(), (IP, puerto))
+	print(obj, "enviado")
+	contador += 1
+print("listo")
