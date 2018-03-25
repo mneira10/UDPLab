@@ -1,6 +1,7 @@
 import socket
 import sys
 import hashlib
+import time
 
 def md5(fname):
     hash_md5 = hashlib.md5()
@@ -29,6 +30,7 @@ print("hash recieved...")
 if(data[1] == "START"):
     s.send("BEGIN".encode())
 
+t = time.time()
 f = open("incoming.txt","wb")
 
 l = s.recv(1024)
@@ -39,6 +41,8 @@ while(l):
 
 f.close()
 print("Done recieving file...")
+
+print("Tiempo que tomo la descarga: " + str((time.time()-t)/1) + " segundos")
 
 myHash = (md5("incoming.txt"))
 

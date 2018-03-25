@@ -2,6 +2,8 @@ import socket
 import sys       
 import hashlib
 
+archivo = "arch.txt"
+
 def md5(fname):
     hash_md5 = hashlib.md5()
     with open(fname, "rb") as f:
@@ -22,7 +24,7 @@ print( 'Conexion TCP activa en direccion:', addr)
 
 
 
-hash = md5("arch.txt")
+hash = md5(archivo)
 # print(hash)
 print("hash: " + hash)
 print("sending hash...")
@@ -39,7 +41,7 @@ if(data=="BEGIN"):
 
 
 
-f = open("arch.txt",'rb')
+f = open(archivo,'rb')
 l = f.read(1024)
 
 while (l):
