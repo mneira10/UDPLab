@@ -16,7 +16,7 @@ IP = "localhost"
 puerto = 12345
 # puerto = int(sys.argv[1])
 bufferSize = 1024
-nomArchivo = "incoming.txt"
+nomArchivo = sys.argv[1]
 
 print("Conectando...")
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

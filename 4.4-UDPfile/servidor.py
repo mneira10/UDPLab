@@ -16,20 +16,20 @@ def md5(fname):
 IP = "localhost"
 puerto = 12345
 
-archivo = "file.txt"
+archivo = sys.argv[1]
 print("Conectando..")
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 print("Conectado.")
 
 print("Abriendo archivo...")
 f = open(archivo,'rb')
-l = f.read(1024)
+l = f.read(1)
 
 while (l):
 	print(str(l))
 	print('Sending file...')
 	s.sendto(l,(IP,puerto))
-	l = f.read(1024)
+	l = f.read(1)
 f.close()
 print("Archivo cerrado")
 s.sendto("@@@**@*@".encode(),(IP,puerto))
