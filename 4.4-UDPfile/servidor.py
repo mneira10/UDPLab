@@ -34,6 +34,8 @@ f.close()
 print("Archivo cerrado")
 s.sendto("@@@**@*@".encode(),(IP,puerto))
 
+s.sendto(md5(archivo).encode(),(IP,puerto))
+
 # s.shutdown(2)
 s.close() 
 print("closed ports")
