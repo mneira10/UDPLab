@@ -21,7 +21,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 contador = 1
 paquetePerdidoCada = 10
 while contador != numObj + 1:
-	# descomente este snippet par simular 1 paquete perdido cada 10, por ejemplo
+	# descomente este snippet par simular 1 paquete perdido cada 10 enviados, por ejemplo
 	# if contador % paquetePerdidoCada == 0:
 	# 	contador += 1
 	# 	continue

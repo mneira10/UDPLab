@@ -2,7 +2,7 @@ import socket
 import sys       
 import hashlib
 
-archivo = "5mb.jpg"
+archivo = sys.argv[1]
 
 def md5(fname):
     hash_md5 = hashlib.md5()
@@ -55,7 +55,7 @@ print("Done Sending")
 
 conn.shutdown(2)
 conn.close()   
-s.shutdown(2)
+# s.shutdown(2)
 s.close() 
 print("closed ports")
 # print(md5("arch.txt"))

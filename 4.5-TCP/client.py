@@ -3,9 +3,6 @@ import sys
 import hashlib
 import time
 
-
-archivo = "incoming.jpg"
-
 def md5(fname):
     hash_md5 = hashlib.md5()
     with open(fname, "rb") as f:
@@ -34,7 +31,7 @@ if(data[1] == "START"):
     s.send("BEGIN".encode())
 
 t = time.time()
-f = open(archivo,"wb")
+f = open(sys.argv[1],"wb")
 
 l = s.recv(1024)
 while(l):
@@ -47,7 +44,7 @@ print("Done recieving file...")
 
 print("Tiempo que tomo la descarga: " + str((time.time()-t)/1) + " segundos")
 
-myHash = (md5(archivo))
+myHash = (md5(sys.argv[1]))
 
 
 
