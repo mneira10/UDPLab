@@ -2,7 +2,7 @@ import socket
 import sys       
 import hashlib
 
-archivo = "arch.txt"
+archivo = "5mb.jpg"
 
 def md5(fname):
     hash_md5 = hashlib.md5()
